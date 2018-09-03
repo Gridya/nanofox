@@ -1,0 +1,33 @@
+#######################################
+# Syntax Coloring Map For Test
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+Init_ArduinoNano_IO		KEYWORD2
+Init_Modem_WISOL		KEYWORD2
+Send_Payload_Sigfox		KEYWORD2
+Print_PAC_WISOL			KEYWORD2
+Print_DEVICE_ID_WISOL	KEYWORD2
+Set_Powermode_Modem_WISOL			KEYWORD2
+Wakeup_From_Deep_Sleep_Modem_WISOL	KEYWORD2
+
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+Nanofox		KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
