@@ -41,6 +41,10 @@ void setup() {
   MyNanofox.Print_PAC_WISOL();	//Prints Modem PAC Number in serial Debug
   MyNanofox.Print_DEVICE_ID_WISOL(); 	//Prints Modem Device ID in serial Debug
   
+  digitalWrite(LED, HIGH); //Blink general use LED (LD1) 
+  delay(2000);
+  digitalWrite(LED, LOW);
+  
   timeref_ms = millis();	// Init time reference 
 }
 
