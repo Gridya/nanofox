@@ -14,11 +14,11 @@ Para realizar esse tutorial você vai precisar:
 - [Kit Nanofox IoT ativado.](https://github.com/Gridya/NANOFOX-Activate/blob/master/README.md)
 
 ## Primeiro passo: Circuito eletrônico (hardware)
-  Na nossa primeira etapa do projeto, iremos realizar a integração da placa Nanofox IoT com o botão (pode-se usar o botão que já vem montado na placa também, a escolha fica por conta do leitor). Faremos isso a partir do uso de um botão conectado no pino D2. O projeto será alimentado via USB mas pode ser alimentado por bateria externa também. 
+  O circuito é muito simples, consistindo apenas em um botão ligado a algum pino de I/O do Arduino (pino D2 no nosso exemplo). 
   
-  [![schematic-v2-smartbuttom.png](https://i.postimg.cc/VvgvnBPj/schematic-v2-smartbuttom.png)](https://postimg.cc/FkfhQSRR "Esquemático Smart Buttom")
+  Em nosso projeto, optamos por realizar a alimentação via porta USB (cabo fornecido junto com o Kit), no entanto uma bateria externa ligada na porta de alimentação da placa pode ser utilizada. 
   
-  A montagem é simples e pode ser feita rapidamente. Em nosso projeto, optamos por realizar a alimentação via porta USB (cabo fornecido junto com o Kit) e usar um botão externo.
+  Informações completas sobre a placa, como datasheet, esquemático e manual de uso estão disponíveis para [download.](https://github.com/Gridya/NANOFOX_Documentation)  
   
   [![IMG-20181204-213812.jpg](https://i.postimg.cc/wjSjxBYH/IMG-20181204-213812.jpg)](https://postimg.cc/4YQgBs3F "Placa Nanofox IoT montada com antena e botão externo")
   
