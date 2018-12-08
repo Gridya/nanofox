@@ -14,7 +14,7 @@ Para realizar esse tutorial você vai precisar:
 - [Kit Nanofox IoT ativado.](https://github.com/Gridya/NANOFOX-Activate/blob/master/README.md)
 
 ## Primeiro passo: Circuito eletrônico (hardware)
-  Na nossa primeira etapa do projeto, iremos realizar a integração da placa Nanofox IoT com o botão (pode-se usar o botão que já vem montado na placa também, a escolha fica por conta do leitor). Faremos isso a partir do uso de um botão conectado no pino D2. O projeto será alimentado via USB mas pode ser alimentado por bateria também. 
+  Na nossa primeira etapa do projeto, iremos realizar a integração da placa Nanofox IoT com o botão (pode-se usar o botão que já vem montado na placa também, a escolha fica por conta do leitor). Faremos isso a partir do uso de um botão conectado no pino D2. O projeto será alimentado via USB mas pode ser alimentado por bateria externa também. 
   
   [![schematic-v2-smartbuttom.png](https://i.postimg.cc/VvgvnBPj/schematic-v2-smartbuttom.png)](https://postimg.cc/FkfhQSRR "Esquemático Smart Buttom")
   
@@ -22,8 +22,11 @@ Para realizar esse tutorial você vai precisar:
   
   [![IMG-20181204-213812.jpg](https://i.postimg.cc/wjSjxBYH/IMG-20181204-213812.jpg)](https://postimg.cc/4YQgBs3F "Placa Nanofox IoT montada com antena e botão externo")
   
-## Segundo passo: Programação do firmware para o projeto
-  Em nossa segunda etapa trabalharemos com programação dentro do Arduino IDE. O código fonte está disponibilizado para download aqui e também está disponível a seguir.
+## Segundo passo: Programação do Arduino (firmware)
+  Para realizar a leitura do botão e envio da mensagem via rede Sigfox, um programa muito simples foi desenvolvido. O código fonte pode ser clonado deste repositório, compilado e carregado para a placa Arduino Nano do Kit Nanofox. 
+  
+  Segue abaixo o código fonte e uma descrição resumida:
+  
   ```c++
 /**
 **************************************************************************************************
@@ -83,25 +86,24 @@ void loop() {
   }
 }
   ```
-  Seguem algumas breves explicações sobre o código.
+ 
   #### Bibliotecas necessárias:
-  Para nosso simples projeto, precisamos incluir apenas a biblioteca [Nanofox.h](https://github.com/Gridya/nanofox), que será necessária para a transmissão de dados para a rede Sigfox.
+  O código utiliza a biblioteca [nanofox](https://github.com/Gridya/nanofox), responsável pela comunicação com o modem Sigfox Wisol presente no Kit, que realiza a transmissão de dados para a rede Sigfox.
   #### Função Setup:
-  Finalmente em nossa função setup, iniciaremos nossa lógica propriamente dita. Como necessitamos da leitura de um botão no nosso projeto devemos tratar o pino correspondente a esse botão como *input*, juntamente disso escolhemos o pino que usaremos para esse botão. Nesse caso, iremos escolher o pino D2. 
+  Como necessitamos da leitura de um botão, devemos tratar o pino correspondente como *input*. Nesse caso, iremos escolher o pino D2. 
 Além da nossa configuração necessária para o projeto, devemos adicionar mais algumas coisas como a configuração do Arduino Nano IO e a inicialização do Modem Sigfox WISOL. Além disso, no código fornecido configuramos algumas mensagens para serem mostradas no monitor serial, essa parte é totalmente opcional e o código funciona sem ela.
   #### Função Loop: 
-  Temos agora a parte principal do código. Nosso loop trabalha da seguinte forma: o botão é constantemente lido, se caso o valor lido no botão saía de 1 e vá para 0, ou seja, o botão for apertado. Nosso código entra no while e confere a leitura do botão 2 segundos depois através do delay. Se o botão continua apertado, então é enviado um sinal para a rede Sigfox através de funções da biblioteca Nanofox. Caso o botão não continue apertado após esses dois segundos, o código trata tal fato como se fosse um aperto acidental e não toma nenhuma atitude além de enviar uma mensagem no monitor serial. 
+  No loop principal o estado do botão é monitorado. Se este for pressionado por mais de 2 segundos, então é enviada uma mensagem via rede Sigfox. 
   
-  Com o código já escrito e funcionando na placa Nanofox IoT e juntamente do hardware já pronto também, será possível mandar mensagens para o Backend Sigfox já. As mensagens deverão chegar de forma parecida com a imagem, se tudo ocorrer da melhor maneira, podemos ir para o próximo passo.
+  As mensagens deverão chegar no backend sigfox de forma similar ao apresentado na imagem abaixo.
   
   [![backend-message.png](https://i.postimg.cc/q7kZ3sTG/backend-message.png)](https://postimg.cc/Xrz8MyXZ "Backend Sigfox com sinal recebido")
   
 ## Terceiro passo: Integração da plataforma Tago com o Backend Sigfox
-  Essa etapa é muito bem relatada e explicada a partir de um [tutorial escrito pela própria Tago](https://tago.elevio.help/en/articles/33). Nesse tutorial está relatado tanto a parte feita na plataforma Tago quanto a criação de Callbacks no Backend Sigfox para essa integração, tudo muito bem detalhado, vale a pena conferir.
-  Após a conclusão de toda integração, podemos seguir para a última etapa.
+  Essa etapa é muito bem relatada e explicada a partir de um [tutorial escrito pela própria Tago](https://tago.elevio.help/en/articles/33). Nesse tutorial estão descritas as configuração necessárias tanto na plataforma Tago quanto na criação de Callbacks no Backend Sigfox para direcionar as mensagens Sigfox para a aplicação rodando na Tago.
   
 ## Quarto passo: Configuração para envio de e-mail via plataforma Tago
-  Após concluída a integração da plataforma Tago com o backend Sigfox e antes de começarmos o código no Arduino IDE, temos mais um passo necessário na plataforma Tago: configurarmos a plataforma para enviar um e-mail de emergência. Para começarmos, acessaremos a opção **Action** no menu lateral da página de desenvolvedor na Tago. Após entrarmos em **Action**, clicamos no botão **Add Action** no canto superior direito. Assim, entramos em uma nova ação a ser criada. Na aba **General Information** damos um nome a nossa ação, escolhemos a ação a ser tomada (**Send Email**) e preenchemos com o destinatário, título e conteúdo do email. A configuração nessa aba deve ficar assim:
+  Após concluída a integração da plataforma Tago com o backend Sigfox, vamos criar um trigger na plataforma Tago para para enviar um e-mail sempre que for recebida uma mensagen de botão pressionado. Para começarmos, acessaremos a opção **Action** no menu lateral da página de desenvolvedor na Tago. Após entrarmos em **Action**, clicamos no botão **Add Action** no canto superior direito. Assim, entramos em uma nova ação a ser criada. Na aba **General Information** damos um nome a nossa ação, escolhemos a ação a ser tomada (**Send Email**) e preenchemos com o destinatário, título e conteúdo do email. A configuração nessa aba deve ficar assim:
   
   [![general-information.png](https://i.postimg.cc/kXxqs3F1/general-information.png)](https://postimg.cc/3dJsrqqm "Configuração da aba General Information")
   
@@ -121,4 +123,4 @@ Além da nossa configuração necessária para o projeto, devemos adicionar mais
   
   ![Gif_Smart_Buttom](https://media.giphy.com/media/kFezlCCsnJ4OiMOgvR/giphy.gif)
   
-  Agora você está pronto para ir muito além no mundo IoT, sua primeira aplicação usando a placa Nanofox IoT já foi feita! Liberte sua imaginação e mão na massa! Os seus projetos poderão ser cada vez mais interessantes e complexos, projete sem medo! A Nanofox IoT dá conta ;)  [![100.png](https://i.postimg.cc/W1FnZdBy/100.png)](https://www.gridya.com.br/ "Gridya")
+  Agora você está pronto para ir muito além no mundo IoT, sua primeira aplicação usando a placa Nanofox IoT já foi feita! Liberte sua imaginação e mão na massa! Os seus projetos poderão ser cada vez mais interessantes e complexos, projete sem medo! A Nanofox IoT dá conta
