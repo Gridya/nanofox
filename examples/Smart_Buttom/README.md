@@ -111,16 +111,18 @@ Além da nossa configuração necessária para o projeto, devemos adicionar mais
   
   [![trigger.png](https://i.postimg.cc/YCT6rzwG/trigger.png)](https://postimg.cc/XrcGxFq4 "Configuração da aba Trigger")
   
-  Após isso, nossa ação já está pronta para ser salva e usada! Antes de testarmos a nossa ação é importante lembrar que existem muitos mais recursos na plataforma Tago, explore um pouco a aba **Dashboard**, nessa aba podemos utilizar as mais diversas formas para visualização de nossos dados, um exemplo é a criação de uma tabela com a ID do nosso dispositivo, data e o horário que os emails foram enviados:
+  Após isso, nossa ação já está pronta para ser salva e usada! 
+  
+  Ná área de **Dashboard** incluimos um tabela para visualizar o ID do nosso dispositivo, datas e o horários em que os emails foram enviados:
   
   [![tabela-emails.png](https://i.postimg.cc/6QJ4jc3d/tabela-emails.png)](https://postimg.cc/4YP3nzpd "Tabela com ID, data e horário")
   
-  Vamos agora testar a nossa action que acabamos de criar, caso você executar a ação necessária para envio de dados para a rede Sigfox, você deverá então receber, em poucos segundos, um email conforme você configurou na plataforma Tago. A imagem exemplifica isso:
+  Sempre que o botão Sigfox é pressinado, um email conforme abaixo é recebido pelo usuário do serviço. 
   
   [![email-recebido.png](https://i.postimg.cc/tR3Nt0mX/email-recebido.png)](https://postimg.cc/4n3cs0gM "Email recebido!")
   
-  Pode-se mostrar também um exemplo usando uma tabela na aba Dashboard da plataforma Tago. Montando uma tabela dinâmica que contenha todas as datas e horários em que foi enviado um email. O exemplo abaixo demostra isso:
+  Parabéns! Você criou um botão inteligente usando as mais modernas tecnologias de IoT! 
   
   ![Gif_Smart_Buttom](https://media.giphy.com/media/kFezlCCsnJ4OiMOgvR/giphy.gif)
   
-  Agora você está pronto para ir muito além no mundo IoT, sua primeira aplicação usando a placa Nanofox IoT já foi feita! Liberte sua imaginação e mão na massa! Os seus projetos poderão ser cada vez mais interessantes e complexos, projete sem medo! A Nanofox IoT dá conta
+ 
