@@ -2,7 +2,7 @@
 
 Essa página apresenta um tutorial de um botão inteligente (smart buttom) usando o kit Nanofox IoT e a rede Sigfox.
 
-O termo Smart Buttom é geralmente associado a um botão com conexão a internet, que quando pressionado pode disparar algum serviço associado. Alguns exemplos são botões de emergência/pânico, chamada para manutenção de algum equipamento, Chamada para atendimento VIP, etc.    
+O termo Smart Buttom é geralmente associado a um botão com conexão a internet, que quando pressionado pode disparar algum serviço. Alguns exemplos são botões de emergência/pânico, chamada para manutenção de equipamento, Chamada para atendimento VIP, etc.    
 
 No nosso tutorial o botão quando acionado, envia uma mensagem para a plataforma Tago.io que dispara um email de notificação. 
 
@@ -10,20 +10,20 @@ No nosso tutorial o botão quando acionado, envia uma mensagem para a plataforma
 Para realizar esse tutorial você vai precisar:
 
 - [Arduino IDE instalada no computador.](https://www.arduino.cc/en/Guide/HomePage)
-- [Conta cadastrada na plataforma Tago.](https://tago.io/)
+- [Conta na plataforma Tago.](https://tago.io/)
 - [Kit Nanofox IoT ativado.](https://github.com/Gridya/NANOFOX-Activate/blob/master/README.md)
 
 ## Primeiro passo: Circuito eletrônico (hardware)
-  O circuito é muito simples, consistindo apenas em um botão ligado a algum pino de I/O do Arduino (pino D2 no nosso exemplo). 
+  O circuito é muito simples, consistindo apenas em um botão ligado a algum pino de I/O do Arduino (D2 no nosso exemplo). 
   
-  Em nosso projeto, optamos por realizar a alimentação via porta USB (cabo fornecido junto com o Kit), no entanto uma bateria externa ligada na porta de alimentação da placa pode ser utilizada. 
+  Em nosso projeto, optamos por realizar a alimentação da placa via porta USB (cabo fornecido junto com o Kit), no entanto uma bateria externa ligada na porta de alimentação pode ser utilizada. 
   
   Informações completas sobre a placa, como datasheet, esquemático e manual de uso estão disponíveis para [download.](https://github.com/Gridya/NANOFOX_Documentation)  
   
   [![IMG-20181204-213812.jpg](https://i.postimg.cc/wjSjxBYH/IMG-20181204-213812.jpg)](https://postimg.cc/4YQgBs3F "Placa Nanofox IoT montada com antena e botão externo")
   
 ## Segundo passo: Programação do Arduino (firmware)
-  Para realizar a leitura do botão e envio da mensagem via rede Sigfox, um programa muito simples foi desenvolvido. O código fonte pode ser clonado deste repositório, compilado e carregado para a placa Arduino Nano do Kit Nanofox. 
+  Para realizar a leitura do botão e envio da mensagem via rede Sigfox, um programa muito simples foi desenvolvido. O código fonte pode ser clonado deste repositório, compilado e carregado para a placa Arduino Nano do Kit. 
   
   Segue abaixo o código fonte e uma descrição resumida:
   
@@ -88,19 +88,19 @@ void loop() {
   ```
  
   #### Bibliotecas necessárias:
-  O código utiliza a biblioteca [nanofox](https://github.com/Gridya/nanofox), responsável pela comunicação com o modem Sigfox Wisol presente no Kit, que realiza a transmissão de dados para a rede Sigfox.
+  O código utiliza a biblioteca [nanofox](https://github.com/Gridya/nanofox), responsável pela comunicação com o modem Sigfox Wisol presente no Kit.
   #### Função Setup:
   Como necessitamos da leitura de um botão, devemos tratar o pino correspondente como *input*. Nesse caso, iremos escolher o pino D2. 
 Além da nossa configuração necessária para o projeto, devemos adicionar mais algumas coisas como a configuração do Arduino Nano IO e a inicialização do Modem Sigfox WISOL. Além disso, no código fornecido configuramos algumas mensagens para serem mostradas no monitor serial, essa parte é totalmente opcional e o código funciona sem ela.
   #### Função Loop: 
   No loop principal o estado do botão é monitorado. Se este for pressionado por mais de 2 segundos, então é enviada uma mensagem via rede Sigfox. 
   
-  As mensagens deverão chegar no backend sigfox de forma similar ao apresentado na imagem abaixo.
+  As mensagens deverão chegar no backend sigfox de forma similar ao apresentado na imagem abaixo sempre que o botão for pressionado.
   
   [![backend-message.png](https://i.postimg.cc/q7kZ3sTG/backend-message.png)](https://postimg.cc/Xrz8MyXZ "Backend Sigfox com sinal recebido")
   
 ## Terceiro passo: Integração da plataforma Tago com o Backend Sigfox
-  Essa etapa é muito bem relatada e explicada a partir de um [tutorial escrito pela própria Tago](https://tago.elevio.help/en/articles/33). Nesse tutorial estão descritas as configuração necessárias tanto na plataforma Tago quanto na criação de Callbacks no Backend Sigfox para direcionar as mensagens Sigfox para a aplicação rodando na Tago.
+  Essa etapa é explicada a partir de um [tutorial escrito pela própria Tago](https://tago.elevio.help/en/articles/33). Nesse estão descritas as configuração necessárias tanto na plataforma Tago quanto na criação de Callbacks no Backend Sigfox para direcionar as mensagens Sigfox para a aplicação rodando na Tago.
   
 ## Quarto passo: Configuração para envio de e-mail via plataforma Tago
   Após concluída a integração da plataforma Tago com o backend Sigfox, vamos criar um trigger na plataforma Tago para para enviar um e-mail sempre que for recebida uma mensagen de botão pressionado. Para começarmos, acessaremos a opção **Action** no menu lateral da página de desenvolvedor na Tago. Após entrarmos em **Action**, clicamos no botão **Add Action** no canto superior direito. Assim, entramos em uma nova ação a ser criada. Na aba **General Information** damos um nome a nossa ação, escolhemos a ação a ser tomada (**Send Email**) e preenchemos com o destinatário, título e conteúdo do email. A configuração nessa aba deve ficar assim:
