@@ -1,28 +1,26 @@
-# Tutorial para Smart Buttom usando Nanofox IoT
+# Smart Buttom Sigfox usando Nanofox IoT Kit
 
-Essa página apresenta um passo a passo do procedimento necessário para realizar seu primeiro projeto Nanofox IoT: um Smart Buttom usando Nanofox IoT! 
+Essa página apresenta um tutorial de um botão inteligente (smart buttom) usando o kit Nanofox IoT e a rede Sigfox.
+
+O termo Smart Buttom é geralmente associado a um botão com conexão a internet, que quando pressionado pode disparar algum serviço associado. Alguns exemplos são botões de emergência/pânico, chamada para manutenção de algum equipamento, Chamada para atendimento VIP, etc.    
+
+No nosso tutorial o botão quando acionado, envia uma mensagem para a plataforma Tago.io que dispara um email de notificação. 
 
 ## Recomendações:
+Para realizar esse tutorial você vai precisar:
+
 - [Arduino IDE instalada no computador.](https://www.arduino.cc/en/Guide/HomePage)
 - [Conta cadastrada na plataforma Tago.](https://tago.io/)
-- [Ativação do kit Nanofox IoT.](https://github.com/Gridya/NANOFOX-Activate/blob/master/README.md)
+- [Kit Nanofox IoT ativado.](https://github.com/Gridya/NANOFOX-Activate/blob/master/README.md)
 
-## Aplicação do Projeto:
-  O projeto trata-se de um tutorial para criar sua primeira aplicação usando Nanofox IoT: um Smart Buttom! Um Smart Buttom usando Nanofox IoT é algo que pode ser aplicado nas mais diversas situações. No nosso tutorial usaremos como exemplo um Smart Buttom que quando acionado, dispara um email através da plataforma Tago. Sinta-se livre para buscar outras aplicações após aprender como fazer um Smart Buttom através desse tutorial!
-
-## Resumo das etapas:
-  O nosso projeto será dividido em 4 etapas principais, além de etapas que não fazem parte do projeto em si mas que são necessárias para a execução de tal.
-  
-## Primeiro passo: Implementação do hardware
-  Na nossa primeira etapa do projeto, iremos realizar a integração da placa Nanofox IoT com o botão (pode-se usar o botão que já vem montado na placa também, a escolha fica por conta do leitor). Faremos isso a partir do uso de um botão conectado no pino D2. O projeto será alimentado via USB mas pode ser alimentado por bateria também. Na imagem abaixo o esquemático está descrito junto da bateria, caso queira deixar seu projeto mais portátil, basta seguir o esquemático.
+## Primeiro passo: Circuito eletrônico (hardware)
+  Na nossa primeira etapa do projeto, iremos realizar a integração da placa Nanofox IoT com o botão (pode-se usar o botão que já vem montado na placa também, a escolha fica por conta do leitor). Faremos isso a partir do uso de um botão conectado no pino D2. O projeto será alimentado via USB mas pode ser alimentado por bateria também. 
   
   [![schematic-v2-smartbuttom.png](https://i.postimg.cc/VvgvnBPj/schematic-v2-smartbuttom.png)](https://postimg.cc/FkfhQSRR "Esquemático Smart Buttom")
   
-  A montagem é simples e pode ser feita rapidamente. Em nosso projeto, optamos por realizar a alimentação via USB e usar o botão externo, dessa forma, a nossa placa Nanofox IoT juntamente do botão externo ficou da seguinte forma:
+  A montagem é simples e pode ser feita rapidamente. Em nosso projeto, optamos por realizar a alimentação via porta USB (cabo fornecido junto com o Kit) e usar um botão externo.
   
   [![IMG-20181204-213812.jpg](https://i.postimg.cc/wjSjxBYH/IMG-20181204-213812.jpg)](https://postimg.cc/4YQgBs3F "Placa Nanofox IoT montada com antena e botão externo")
-  
-  Feita a montagem de forma correta e da maneira que o leitor preferiu, pode-se ir para a próxima etapa: a programação.
   
 ## Segundo passo: Programação do firmware para o projeto
   Em nossa segunda etapa trabalharemos com programação dentro do Arduino IDE. O código fonte está disponibilizado para download aqui e também está disponível a seguir.
